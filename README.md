@@ -1,55 +1,72 @@
-# Allan_Pizza_Backend_Final
-# Allan_Pizza_Backend_Final
+Allan_Pizza_Backend_Final - API Laravel
+Descripción
+API desarrollada en Laravel 10 para el sistema de gestión de pizzas "Proyecto Perrones". Contiene endpoints para:
 
-# API Backend Laravel - Proyecto Perrones
+Gestión de usuarios
 
-Esta API está desarrollada en Laravel 10 y contiene los endpoints para gestionar usuarios, carrito, pedidos, administración y reparto.
+Carrito de compras
 
----
+Pedidos
 
-## Requisitos Previos
+Administración
 
-- PHP 8.1 o superior  
-- Composer  
-- MySQL o MariaDB  
-- Postman (recomendado para probar la API)  
+Sistema de reparto
 
----
+Requisitos Previos
+PHP 8.1 o superior
 
-## Instalación y Ejecución
+Composer
 
-1. Clonar el repositorio:
+MySQL
 
-git clone https://github.com/JeremyFlxress/Allan_Pizza_Backend_Final.git //RECALCAR QUE EL PROYECTO ESTA EN LA RAMA MASTER, una disculpa
-cd se van al proyecto
-Instalar dependencias de PHP con Composer:
+Postman (recomendado para pruebas)
 
+Instalación
+Clonar el repositorio:
+
+bash
+git clone https://github.com/JeremyFlxress/Allan_Pizza_Backend_Final.git
+Nota: El proyecto está en la rama master.
+
+Navegar al directorio del proyecto:
+
+bash
+cd Allan_Pizza_Backend_Final
+Instalar dependencias:
+
+bash
 composer install
+Configurar base de datos:
 
-Ejecutar migraciones y seeders para crear tablas y datos iniciales:
-
+bash
 php artisan migrate
 php artisan migrate --seed
+Iniciar servidor:
 
-Iniciar servidor local:
-
-php artisan serve 
-
+bash
+php artisan serve
 La API estará disponible en: http://127.0.0.1:8000
 
 Configuración de CORS
-El manejo de CORS ya está configurado para permitir peticiones desde el frontend.
-Puedes encontrar la configuración en:
-config/cors.php
-Si hay problemas de conexión o errores relacionados con CORS, por favor revisa este archivo y ajusta los orígenes permitidos según sea necesario.
+El manejo de CORS está configurado en config/cors.php.
 
-Uso de la API (Endpoints principales)
-aca les dejo ejemplos de como pueden probar la api en post man
+Si encuentras problemas de conexión:
 
+Revisa este archivo
+
+Ajusta los orígenes permitidos según sea necesario
+
+Endpoints Principales
+Autenticación
 Registro de usuario
-POST /api/register
-Ejemplo JSON:
 
+Método: POST
+
+Ruta: /api/register
+
+Ejemplo:
+
+json
 {
   "nombre": "Usuario Prueba",
   "email": "usuario@prueba.com",
@@ -59,31 +76,55 @@ Ejemplo JSON:
   "contraseña_confirmation": "password123"
 }
 Login
-POST /api/login
-Ejemplo JSON:
 
+Método: POST
 
+Ruta: /api/login
+
+Ejemplo:
+
+json
 {
   "email": "usuario@prueba.com",
   "password": "password123"
 }
 Carrito (requiere autenticación)
-Agregar producto: POST /api/carrito
+Agregar producto
 
+Método: POST
 
+Ruta: /api/carrito
+
+Ejemplo:
+
+json
 {
   "producto_id": 1,
   "tamaño_id": 2,
   "cantidad": 1
 }
-Actualizar ítem: PUT /api/carrito/{id}
+Actualizar ítem
 
+Método: PUT
+
+Ruta: /api/carrito/{id}
+
+Ejemplo:
+
+json
 {
   "cantidad": 2
 }
 Pedidos (requiere autenticación)
-Crear pedido: POST /api/pedidos
+Crear pedido
 
+Método: POST
+
+Ruta: /api/pedidos
+
+Ejemplo:
+
+json
 {
   "productos": [
     { "id": 1, "cantidad": 2 },
@@ -93,51 +134,8 @@ Crear pedido: POST /api/pedidos
   "metodo_pago": "efectivo"
 }
 Administración (requiere cuenta admin)
-Actualizar estado de pedido: PUT /api/admin/pedidos/{id}
+Actualizar estado de pedido
 
+Método: PUT
 
-{
-  "estado": "preparación"
-}
-Actualizar estado de pago: PUT /api/pagos/{id}
-
-{
-  "estado": "pagado",
-  "referencia": "REF-123456"
-}
-Crear producto: POST /api/admin/productos
-
-
-{
-  "nombre": "Pizza Especial",
-  "descripcion": "Pizza con ingredientes premium",
-  "precio": 12.99,
-  "imagen": "pizza_especial.jpg",
-  "categoria": "pizza",
-  "disponible": true,
-  "ingredientes": [1, 2, 3, 9]
-}
-Actualizar producto: PUT /api/admin/productos/{id}
-
-{
-  "nombre": "Pizza Super Especial",
-  "precio": 14.99,
-  "disponible": true
-}
-Repartidor (requiere cuenta repartidor)
-Marcar pedido como entregado: PUT /api/repartidor/pedidos/{id}/entregado
-
-
-{
-  "comentario": "Entregado en la puerta principal"
-}
-
-Probar API con Postman
-Usar el endpoint de registro (register) para crear un usuario.
-
-Hacer login para obtener el token de autenticación (Bearer Token). y con eso hacen acciones diferentes
-
-Incluyan una vez iniciada sesion el token que les da, para hacer peticiones de pedidios etc.
-
-Usar cuerpo JSON en peticiones POST y PUT.
-
+Ruta: /api/admin/pedidos/{id}
